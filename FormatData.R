@@ -4,10 +4,13 @@
 # Author      : Emixi Valdez (emixi-sthefany.valdez-medina.1@ulaval.ca)
 # Date        : 12 MAR 2020
 #
-# Description :
+# Description : This code prepares the observations and precipitation forecasts in HOOPLA format(Hydromet_obs & Ens_met_fcst 
+#               folders)to work directly on the CSGD method 
+#               
 ########################################################################################################################
 #----------------------------------------------------- DECLARATIONS ----------------------------------------------------
 rm(list=ls())  #clear all variables
+cat("\014")    #clear the console
 
 library(abind)
 library(R.matlab)
@@ -23,7 +26,7 @@ options(scipen = 999) #Disable scientific notation
 setwd("C:/Users/Emi Valmed/Documents/COURS LAVAL/THESE/PROJECT/PROGRAMMING/GitHUB/CSGD/") #Path of the main folder
 #-----------------------------------------------------------------------------------------
 
-ts <- '24h'                                                              # Time step: could be 24h or 3h. Otherwise, you must 
+ts <- '24h'                                                             # Time step: could be 24h or 3h. Otherwise, you must 
                                                                         # create the folder named as your TimeSteps into the 
                                                                         # main folders of the program (the ones in capital letters).
                                                                            
@@ -86,7 +89,7 @@ Pt_Fcast <-array(dim= c(length(dates), nbmMet, nbLT, nBV))
 Pt_Obs <-array(dim=c(length(dates), nbLT, nBV))
 
 
-for (iBV in 1:1){
+for (iBV in 1:nBV){
   
   #Extracting forecast:
   pathFcast <-file.path(paste(file_data,"/","Ens_met_fcast/Met_fcast_",nameC[iBV],".mat",sep=''))
@@ -104,10 +107,10 @@ for (iBV in 1:1){
   Obs_Data <- readMat(pathObs)
   
   
-  for (iLT in 1:nbLT){
+  for (ibLT in 1:nbLT){
     
-    Pt_Obs[,iLT,iBV] <- Obs_Data$Pt[Index+iLT]
-    
+    Pt_Obs[,ibLT,iBV] <- Obs_Data$Pt[Index+ibLT]
+
   }
 } #nVB
 
