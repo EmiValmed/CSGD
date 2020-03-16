@@ -1,5 +1,40 @@
+########################################################################################################################
+# Name         : AuxiliaryFunctions 
+#
+#
+# Author       : Michael Scheuerer (michael.scheuerer@noaa.gov)
+# 
+#
+# Modification : croping funtion
+#                Modified version of wgt.md in order not to use the weights
+#
+#
+# By           : Emixi Valdez (emixi-sthefany.valdez-medina.1@ulaval.ca)
+# Date         : 12 MAR 2020
+#
+# Description  : A collection of small functions used by the other R-scripts. 
+########################################################################################################################
 
 library(Hmisc)
+
+croping <- function(Date1, Date2, na.rm=FALSE)  {
+  # Date1: date of forecast
+  # Date2: date of observation
+
+  datesDate1 <- as.numeric(paste(year(Date1),
+                                 sprintf("%02d",month(Date1)),
+                                 sprintf("%02d",day(Date1)), 
+                                 sprintf("%02d",hour(Date1)),"00", sep="")) 
+  
+  datesDate2 <- as.numeric(paste(year(Date2),
+                                 sprintf("%02d",month(Date2)),
+                                 sprintf("%02d",day(Date2)), 
+                                 sprintf("%02d",hour(Date2)),"00", sep=""))
+  
+  return(which( datesDate2 %in% datesDate1))
+  
+}
+
 
 ########################################################################################################################
 #                                           CSGD FUNCTIONS
@@ -23,8 +58,6 @@ gini.md <- function(x, na.rm=FALSE)  {
   return(4*sum((1:n)*sort(x, na.last=TRUE))/(n^2)-2*mean(x)*(n+1)/n)
 }
 
-
-# Modified version in order not to use the weights
 wgt.md <- function(x, na.rm=FALSE)  {
   if(na.rm)  x <- x[!is.na(x)]
   x.ord <- order(as.vector(x))
@@ -144,141 +177,3 @@ crps.normal <- function(par, obs, ensmeanano, ensvar, obs.climo)  {
   
   return( mean(crps) )
 }
-
-
-########################################################################################################################
-#                                           PLOTS FUNCTIONS
-########################################################################################################################
-
-
-
-plot.reliability <- function(n.day, x.day, y.day, log.freq=FALSE, N.boot=1000, n.max=NULL, threshold=NULL, cleadb=NULL, cleade=NULL)
-{
-  hist.freq <- apply(n.day,2,sum)
-  if (is.null(n.max)) {
-    n.max <- max(hist.freq)
-  }
-  rg.hist <- c(0,n.max)
-  l <- nrow(n.day)
-  
-  n <- apply(n.day,2,sum)
-  r <- apply(x.day,2,sum)/n
-  f <- apply(y.day,2,sum)/n
-  
-  boot.perm <- matrix(sample(1:l, N.boot*l, replace=TRUE), N.boot, l)
-  n.boot <- apply(boot.perm, 1, FUN=function(ind) apply(n.day[ind,],2,sum))
-  x.boot <- apply(boot.perm, 1, FUN=function(ind) apply(x.day[ind,],2,sum))
-  y.boot <- apply(boot.perm, 1, FUN=function(ind) apply(y.day[ind,],2,sum))
-  r.boot <- x.boot / n.boot
-  f.boot <- y.boot / n.boot
-  
-  f.q90 <- matrix(r,2,length(breaks)-1,byrow=TRUE) + apply(f.boot-r.boot, 1, quantile, prob=c(0.05,0.95), na.rm=TRUE)
-  
-  #   var.ok <- apply(f.q90,2,diff) < 0.8
-  var.ok <- hist.freq > 20
-  plot(r[var.ok], f[var.ok], type="b", ylim=c(0,1), xlim=c(0,1), cex=0.8, xlab="forecast probabilities",
-       ylab="observed frequencies", pch=19, col="blue", cex.lab=1.2, lwd=2)
-  abline(a=0, b=1, col=1, lwd=1)
-  for (k in (1:(length(breaks)-1))[var.ok])  {
-    lines(rep(r[k],2), f.q90[,k], col="blue", lwd=1)
-    lines(r[k]+c(-0.01,0.01), rep(f.q90[1,k],2), col="blue", lwd=2)
-    lines(r[k]+c(-0.01,0.01), rep(f.q90[2,k],2), col="blue", lwd=2)
-  }
-  #   title(paste("Reliability Diagram for  'precipitation >", threshold, "'"), cex=0.9)
-  title(paste("Lead time: ",cleadb,"-",cleade,"h,  threshold:", threshold, sep=""), cex=0.9)
-  
-  obs.sum.day <- apply(y.day,1,sum)
-  n.sum.day <- apply(n.day,1,sum)
-  
-  #   N.boot <- apply(n.boot,2,sum)
-  #   obs.mean.boot <- apply(boot.perm, 1, FUN=function(ind) mean(obs.sum.day[ind])) / apply(boot.perm, 1, FUN=function(ind) mean(n.sum.day[ind]))
-  #   REL.boot <- apply(n.boot*(f.boot-r.boot)^2,2,sum,na.rm=TRUE) / N.boot
-  #   RES.boot <- apply(n.boot*(f.boot-obs.mean.boot)^2,2,sum,na.rm=TRUE) / N.boot
-  #   UNC.boot <- obs.mean.boot*(1-obs.mean.boot)
-  #   BS.boot <- REL.boot - RES.boot + UNC.boot
-  #   n.boot[n.boot==0] <- NA
-  #   corr.term.boot <- apply(n.boot/(n.boot-1)*f.boot*(1-f.boot),2,sum,na.rm=TRUE) / N.boot
-  #   REL.boot.corr <- REL.boot - corr.term.boot
-  #   RES.boot.corr <- RES.boot - corr.term.boot + UNC.boot/(N.boot-1)
-  #   UNC.boot.corr <- (UNC.boot*N.boot)/(N.boot-1)
-  
-  #   REL.q90 <- quantile(REL.boot.corr,prob=c(0.05,0.95),na.rm=TRUE)
-  #   RES.q90 <- quantile(RES.boot.corr,prob=c(0.05,0.95),na.rm=TRUE)
-  #   UNC.q90 <- quantile(UNC.boot.corr,prob=c(0.05,0.95),na.rm=TRUE)
-  #   BS.q90 <- quantile(BS.boot,prob=c(0.05,0.95),na.rm=TRUE)
-  
-  if(log.freq)  {
-    hist.freq <- log10(hist.freq)
-    rg.hist <- c(0,log10(n.max))
-  }
-  
-  plot.hist <- function()  {
-    at <- 0:floor(rg.hist)[2]
-    barplot(hist.freq, ylim=rg.hist*1.05, xaxt="n", yaxt="n", xlab='', ylab='', main='', col=ifelse(var.ok,'blue','lightblue'))
-    axis(4,las=2,at=at,labels=format(10^at,scientific=TRUE), cex.axis=0.8, hadj=0.35, tck=-0.03)
-    box()
-  }
-  subplot( plot.hist(), cnvrt.coords(0.02,0.98,'plt')$usr, size=c(0.8,0.8), vadj=1, hadj=0 )
-  
-  #   text(0.65, 0.21, "5%", pos=4, cex=1.1)
-  #   text(0.87, 0.21, "95%", pos=4, cex=1.1)
-  #   text(0.45, 0.14, "REL:", pos=4, cex=1.1)
-  #   text(0.60, 0.14, formatC(signif(REL.q90[1],3), digits=5, format="f", flag="-", drop0=TRUE), pos=4, cex=1.1)
-  #   text(0.82, 0.14, formatC(signif(REL.q90[2],3), digits=5, format="f", flag="-", drop0=TRUE), pos=4, cex=1.1)
-  #   text(0.45, 0.07, "RES:", pos=4, cex=1.1)
-  #   text(0.60, 0.07, formatC(signif(RES.q90[1],3), digits=5, format="f", flag="-", drop0=TRUE), pos=4, cex=1.1)
-  #   text(0.82, 0.07, formatC(signif(RES.q90[2],3), digits=5, format="f", flag="-", drop0=TRUE) ,pos=4, cex=1.1)
-  #   text(0.45, 0.00, "UNC:", pos=4, cex=1.1)
-  #   text(0.60, 0.00, formatC(signif(UNC.q90[1],3), digits=5, format="f", flag="-", drop0=TRUE), pos=4, cex=1.1)
-  #   text(0.82, 0.00, formatC(signif(UNC.q90[2],3), digits=5, format="f", flag="-", drop0=TRUE), pos=4, cex=1.1)
-}
-
-
-
-
-
-avg.rank <- function(obs, fcst)  {                     ## Average ranks
-  x.ranks <- apply(cbind(obs,fcst), 1, rank)
-  x.preranks <- apply(x.ranks, 1, mean)
-  return(rank(x.preranks,ties="random")[1])
-}
-
-
-bd.rank <- function(obs, fcst)  {                      ## Band depth ranks
-  d <- nrow(fcst)
-  m <- ncol(fcst)+1
-  x.ranks <- apply(cbind(obs, fcst),1,rank)
-  x.preranks <- apply((m-x.ranks)*(x.ranks-1), 1, mean) + m - 1
-  return(rank(x.preranks, ties="random")[1])
-}
-
-
-bd.rank.ties <- function(obs, fcst)  {                                  ## Band depth ranks (variant permitting ties)
-  d <- nrow(fcst)
-  m <- ncol(fcst)+1
-  x.ranks <- apply(cbind(obs, fcst),1, rank, ties.method='max')
-  n.ties <- apply(cbind(obs, fcst), 1, function(x) apply(outer(x,x,'=='), 1, sum))
-  x.preranks <- apply(x.ranks*(m-x.ranks)+(x.ranks-1)*n.ties, 1, mean)
-  return(rank(x.preranks, ties="random")[1])
-}
-
-
-variogram.score <- function(obs, fcst, wgt)  {
-  obs.diff <- sqrt(as.vector(dist(obs,"manhattan")))
-  if (nrow(fcst)<3)  {
-    fcst.diff <- mean(apply(fcst, 2, function(x) sqrt(as.vector(dist(x, "manhattan")))))
-  } else {
-    fcst.diff <- apply(apply(fcst, 2, function(x) sqrt(as.vector(dist(x, "manhattan")))), 1, mean)
-  }
-  return( sum(wgt*(obs.diff-fcst.diff)^2) )
-}
-
-
-energy.score <- function(obs, fcst)  {
-  T1 <- mean(sqrt(apply(sweep(fcst, 1, obs,"-")^2, 2, sum)))
-  T2 <- mean(sqrt(apply(apply(fcst, 1, function(x) as.vector(dist(x, "manhattan")))^2, 1, sum)))*(1-1/ncol(fcst))
-  return(T1-0.5*T2)
-}
-
-
-
