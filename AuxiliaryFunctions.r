@@ -5,7 +5,7 @@
 # Author       : Michael Scheuerer (michael.scheuerer@noaa.gov)
 # 
 #
-# Modification : croping funtion
+# Modifications: Adding the "croping" funtion
 #                Modified version of wgt.md in order not to use the weights
 #
 #
