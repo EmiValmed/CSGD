@@ -5,7 +5,12 @@
 # Date        : 12 MAR 2020
 #
 # Description : This code prepares the observations and precipitation forecasts in HOOPLA format(Hydromet_obs & Ens_met_fcst 
-#               folders) to work directly on the CSGD method 
+#               folders) to work directly on the CSGD method. 
+#
+#HOOPLA's link: https://github.com/AntoineThiboult/HOOPLA
+#               "HOOPLA is a framework providing a modular system for lumped hydrological modeling. It performs calibration, 
+#               simulation, and forecast for multiple hydrological models and various time steps, but also provides an array
+#               of options and features."
 #               
 ########################################################################################################################
 #----------------------------------------------------- DECLARATIONS ----------------------------------------------------
@@ -23,7 +28,7 @@ options(scipen = 999) #Disable scientific notation
 
 
 #-----------------------------------------------------------------------------------------
-setwd("C:/Users/Emi Valmed/Documents/COURS LAVAL/THESE/PROJECT/PROGRAMMING/GitHUB/CSGD/") #Path of the main folder
+setwd("C:/Main/Folder/Path/")                                           #Path of the main folder
 #-----------------------------------------------------------------------------------------
 
 ts <- '24h'                                                             # Time step: could be 24h or 3h. Otherwise, you must 
@@ -116,6 +121,3 @@ for (iBV in 1:nBV){
 
 save(Pt_Obs, Pt_Fcast, dates, ts, nameC, nBV, nbLT, nbmMet, month.string, years, nyrs, 
      file=paste(output_file, "/DATA_FOR_CSGD_",ts, '.Rdata',sep=''))
-
-
-
