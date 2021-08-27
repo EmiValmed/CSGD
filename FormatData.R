@@ -5,7 +5,7 @@
 # Date        : 12 MAR 2020
 #
 # Description : This code prepares the observations and precipitation forecasts in HOOPLA format(Hydromet_obs & Ens_met_fcst 
-#               folders)to work directly on the CSGD method 
+#               folders) to work directly on the CSGD method 
 #               
 ########################################################################################################################
 #----------------------------------------------------- DECLARATIONS ----------------------------------------------------
