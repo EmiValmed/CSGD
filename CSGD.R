@@ -1,5 +1,6 @@
 ########################################################################################################################
 # Name        : Post-processing CSGD. Adopted from Michael Scheuerer's code (paper: 10.1002/qj.2183)
+#               https://github.com/mscheuerer/PrecipitationFields
 #
 # Author      : Emixi Valdez (emixi-sthefany.valdez-medina.1@ulaval.ca)
 # Date        : 06 Avr 2018
@@ -76,7 +77,7 @@ nmonth <- length(month.string)
 for (month in 1:nmonth){
   
   #--------------------------------------------------------------------------------------------------------------------#
-  # ง 4.a of Scheuerer et al. 2015: "ENSEMBLE STATISTICS" 
+  # ยง 4.a of Scheuerer et al. 2015: "ENSEMBLE STATISTICS" 
   #--------------------------------------------------------------------------------------------------------------------#
   
   for (ibLT in 1:nbLT){
@@ -98,7 +99,7 @@ for (month in 1:nmonth){
     ensmean.verif <- ensmeandiff.verif <- enspop.verif <- obs.verif <- array(dim=c(nyrs, nBV, 31)) 
     par.climo <- array(dim=c(nyrs, nBV, 3))
     ensmean.train <- ensmeandiff.train <- enspop.train <- obs.train <- array(dim=c(nyrs, nBV, 91*(nyrs-1)))  # 91 = max. number of days when surrounding the 
-    Fcast <- array(dim=c(31, nbmMet, nbLT, nBV, nyrs))                                                                                                          # 15th of the study month with +-45 days.
+    Fcast <- array(dim=c(31, nbmMet, nbLT, nBV, nyrs))                                                        # 15th of the study month with +-45 days.
     
     
     # Defining training window: for every month, we use the 15th of this month and surrounding
@@ -158,7 +159,7 @@ for (month in 1:nmonth){
     
       
       #----------------------------------------------------------------------------------------------------------------------------------#
-      # ง 4.b of Scheuerer et al. 2015: Fit observation climatology (CSGD distribution parameters for the unconditional distribution
+      # ยง 4.b of Scheuerer et al. 2015: Fit observation climatology (CSGD distribution parameters for the unconditional distribution)
       #----------------------------------------------------------------------------------------------------------------------------------#
       
       for (iBV in 1:nBV){
@@ -198,7 +199,7 @@ for (month in 1:nmonth){
   
   
   #--------------------------------------------------------------------------------------------------------------------#
-  # ง 4.c of Scheuerer et al. 2015: REGRESSION EQUATIONS 
+  # ยง 4.c of Scheuerer et al. 2015: REGRESSION EQUATIONS 
   #--------------------------------------------------------------------------------------------------------------------#
   
   
