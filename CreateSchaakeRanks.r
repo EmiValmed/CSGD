@@ -22,7 +22,7 @@ options(scipen = 999)  #Disable scientific notation
 
 
 #-----------------------------------------------------------------------------------------
-setwd("C:/Users/Emi Valmed/Documents/COURS LAVAL/THESE/PROJECT/PROGRAMMING/GitHUB/CSGD/") #Path of the main folder
+setwd("Main/folder/path/")                                                  #Path of the main folder
 #-----------------------------------------------------------------------------------------
 
 ts <- '3h'                                                                  #Time step: could be 24h or 3h.  
@@ -197,12 +197,3 @@ for (month in 1:nmonth)  {
   save(apcp.mdss.ranks, file=paste(output_file,'apcp_mdss_ranks_',month.string[month],'_',ts,'.Rdata',sep=''))
   
 }# month
-
-
-
-
-
-
-
-
-
