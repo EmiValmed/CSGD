@@ -24,7 +24,7 @@ options(scipen = 999)  #Disable scientific notation
 
 
 #-----------------------------------------------------------------------------------------
-setwd("C:/Users/Emi Valmed/Documents/COURS LAVAL/THESE/PROJECT/PROGRAMMING/GitHUB/CSGD/") #Path of the main folder
+setwd("C:/Main/Folder/Path/")                                                              #Path of the main folder
 #-----------------------------------------------------------------------------------------
 
 ts <- '24h'                                                                                #Time step: could be: 24h, 3h
