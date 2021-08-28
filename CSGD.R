@@ -37,7 +37,7 @@ source("AuxiliaryFunctions.r")
 
 # OUTPUT FOLDERS:
 #----------------
-inputs_files <- paste("./ROW_DATA", ts, sep="/")
+inputs_files <- paste("./RAW_DATA", ts, sep="/")
 file_statistics <- paste(paste("STATISTICS",ts,sep="/"),"/", sep="")
 file_parameters <- paste(paste("PARAMETERS",ts,sep="/"),"/", sep="")
 output_file <- paste(paste("RESULTS",ts,sep="/"),"/", sep="")
