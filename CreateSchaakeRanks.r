@@ -35,7 +35,7 @@ HH <- 6                                                                     #Equ
 # INPUT FOLDERS:
 #---------------
 file_parameters <- paste(paste("PARAMETERS",ts,sep="/"),"/", sep="")                 #Parameters calculated from CSGD code.
-inputs_files <- paste("./ROW_DATA", ts, sep="/")
+inputs_files <- paste("./RAW_DATA", ts, sep="/")
 output_file <- paste(paste("RANKS",ts,sep="/"),"/", sep="")  
 
 ## DOWNLOADING DATA:
