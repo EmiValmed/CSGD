@@ -53,7 +53,7 @@ source("AuxiliaryFunctions.r")
 
 #DIRECTORIES:
 #------------
-file_data <- paste("./ROW_DATA", ts, sep="/")
+file_data <- paste("./RAW_DATA", ts, sep="/")
 output_file <- file_data
 
 
