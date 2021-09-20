@@ -55,7 +55,8 @@ You need a **DATA_FOR_CSGD_timestep.Rdata** file in the **RAW_DATA/time step** f
 1. **AuxiliaryFunctions.r** 
 2. **CSGD.r**
 3. **CreateSchaakeRanks.r**
- 
+
+##
 :bangbang: Before executing the functions, modify the forecasts/observations settings as desired. All parts that can be modified in the scripts are indicated ("THE ONLY PART TO MODIFY"):
 
 * setwd("C:/Main/Folder/Path/")  
