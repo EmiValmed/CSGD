@@ -1,5 +1,5 @@
 # CSGD :umbrella: :earth_americas: :computer:
-This repository contains files to post-process precipitation ensemble forecasts using the [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) method. The scripts are designed to be used in conjunction with [HOOPLA](https://github.com/AntoineThiboult/HOOPLA).
+This repository contains files to post-process precipitation ensemble forecasts using the [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) method. The scripts are designed to be compatible with [HOOPLA](https://github.com/AntoineThiboult/HOOPLA). That is, [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) outputs can be used as input variables in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) hydrological models.
 
 The [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) post-processor is based on a complex heteroscedastic, nonlinear regression model conceived to address the peculiarities of precipitation (e.g., its intermittent and highly skewed nature and its typically large forecast errors). This method yields full predictive probability distributions for precipitation accumulations based on ensemble model output statistics (EMOS) and censored, shifted gamma distributions. 
 
@@ -15,8 +15,9 @@ The following gives a brief description of the individual files:
 
 ## How does it work? :memo:
 
-### Preliminary steps
+### When using [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) data
 
+#### Preliminary steps 
 1. Copy and paste the **Hydromet_obs** & **Ens_met_fcst** folders from [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) into the **RAW_DATA/time step** folder (time step could be 3h or 24h). Folders path in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA):
 
     >  **Observations:** HOOPLA-master/Data/time step/Hydromet_obs
@@ -27,14 +28,35 @@ The following gives a brief description of the individual files:
 
     > **Catchments names:** HOOPLA-master/Data/time step/Misc
 
-### Execute the functions in the following order:
+#### Execute the functions in the following order:
 
 1. **AuxiliaryFunctions.r** 
 2. **FormatData.r**
 3. **CSGD.r**
 4. **CreateSchaakeRanks.r**
-    
- :bangbang: Before executing the functions, modify the forecasts/observations settings as desired. All parts that can be modified in the scripts are indicated ("THE ONLY PART TO MODIFY"):
+
+### without using [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) data
+ 
+#### Preliminary steps 
+You need a **DATA_FOR_CSGD_timestep.Rdata** file in the **RAW_DATA/time step** folder with the following variables:
+* **Pt_Obs** = observations --> dim(days, nbLT,nBV) 
+* **Pt_Fcast** = Forecasts -> dim(days, nbmMet, nbLT, nBV)
+* **dates** =  a numeric date format of the post-processing period
+* **ts** = time step 
+* **nameC** = list with catchments names
+* **nBV** = No. of catchments
+* **nbLT** = lead times
+* **nbmMet** = No. of meteorological ensemble members
+* **month.string** = c("Jan","Feb","Mar","Apr","Mai","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+* **years** = list with the years of the post-processing period [e.g., c(2000,2001,2002,...etc)]
+* **nyrs** = No. of years
+
+#### Execute the functions in the following order:
+1. **AuxiliaryFunctions.r** 
+2. **CSGD.r**
+3. **CreateSchaakeRanks.r**
+ 
+:bangbang: Before executing the functions, modify the forecasts/observations settings as desired. All parts that can be modified in the scripts are indicated ("THE ONLY PART TO MODIFY"):
 
 * setwd("C:/Main/Folder/Path/")  
 * **ts** = time step
