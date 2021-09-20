@@ -2,6 +2,10 @@
 This repository contains files to generate calibrated precipitation ensemble forecasts to be used in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) directly. 
 [CSGD](https://github.com/mscheuerer/PrecipitationFields).
 
+The [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) is based on a complex heteroscedastic, nonlinearregression model conceived to address the peculiarities of precipitation (e.g., its intermittent and highly skewed nature andits typically large forecast errors). This method yields full predictive probability distributions for precipitation accumulations based on ensemble model output statistics (EMOS) and censored, shifted gamma distributions. 
+
+[HOOPLA](https://github.com/AntoineThiboult/HOOPLA) is an automatic software that allows to carry out model calibration and obtain hydrological simulations and forecastsat different time steps.
+
 The following gives a brief description of the individual files: 
 
 * **FormatData.r**: This code prepares the observations and precipitation forecasts in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) format to work directly on the CSGD functions. It reads the Matlab variables in Hydromet_obs & Ens_met_fcst folders. 
@@ -20,8 +24,8 @@ The following gives a brief description of the individual files:
 2. Copy and paste the **catchment_names.mat** file into the **RAW_DATA/time step** folder. File path in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA):
     > **Catchments names:** HOOPLA-master/Data/time step/Misc
 
-### 
-Execute the functions in the following order:
+### Execute the functions in the following order:
+
 1. **AuxiliaryFunctions.r** 
 2. **FormatData.r**
 3. **CSGD**
@@ -30,12 +34,11 @@ Execute the functions in the following order:
 Before executing the functions, modify the forecasts/observations settings as desired. All parts that can be modified are indicated ("THE ONLY PART TO MODIFY"):
     * setwd("C:/Main/Folder/Path/")  
     * ts = time step
-    * nbmMet = No. of ensemble members
+    * nbmMet = No. of meteorological ensemble members
     * nbLT = lead times
-    * StartDateFcast = 
-    * FinDateFcast
-    StartDateObs
-    FinDateObs
-    HH = Equal 6 if ts= 3h and equal 0 if ts= 24h define time window for observation dates
-
+    * StartDateFcast = first day of the forecast period
+    * FinDateFcast = last day of the forecast period
+    * StartDateObs = first day of the observation period
+    * FinDateObs = last day of the observation period
+    * HH = define time window for observation dates. Equal 6 if ts= 3h and equal 0 if ts= 24h 
 
