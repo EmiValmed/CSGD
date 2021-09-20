@@ -1,13 +1,10 @@
 ########################################################################################################################
 # Name         : AuxiliaryFunctions 
 #
-#
 # Author       : Michael Scheuerer (michael.scheuerer@noaa.gov)
 # 
-#
 # Modifications: Adding the "croping" funtion
 #                Modified version of wgt.md in order not to use the weights
-#
 #
 # By           : Emixi Valdez (emixi-sthefany.valdez-medina.1@ulaval.ca)
 # Date         : 12 MAR 2020
