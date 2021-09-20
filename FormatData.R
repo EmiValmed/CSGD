@@ -4,8 +4,8 @@
 # Author      : Emixi Valdez (emixi-sthefany.valdez-medina.1@ulaval.ca)
 # Date        : 12 MAR 2020
 #
-# Description : This code prepares the observations and precipitation forecasts in HOOPLA format(Hydromet_obs & Ens_met_fcst 
-#               folders) to work directly on the CSGD method. 
+# Description : This code prepares the observations and precipitation forecasts in HOOPLA format (Hydromet_obs & Ens_met_fcst 
+#               folders) to work directly on the CSGD functions. 
 #
 #HOOPLA's link: https://github.com/AntoineThiboult/HOOPLA
 #               "HOOPLA is a framework providing a modular system for lumped hydrological modeling. It performs calibration, 
