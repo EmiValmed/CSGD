@@ -12,8 +12,11 @@ The following gives a brief description of the individual files:
 
 ## How does it work?
 
-1. Copy and paste the **Hydromet_obs** & **Ens_met_fcst** folders from [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) into the **RAW_DATA/time step** folder (time step could be 3h or 24h). Path of the folders in HOOPLA:
+### Preliminar steps
+
+1. Copy and paste the **Hydromet_obs** & **Ens_met_fcst** folders from [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) into the **RAW_DATA/time step** folder (time step could be 3h or 24h). Folders path in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA):
     >  **Observations:** HOOPLA-master/Data/time step/Hydromet_obs
-    >  **Forecasts:** HOOPLA-master/Data/time step/Ens_met_fcst 
-3.  
+       **Forecasts:** HOOPLA-master/Data/time step/Ens_met_fcst 
+2. Copy and paste the **catchment_names.mat** file into the **RAW_DATA/time step** folder. File path in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA):
+    > **Catchments names:** HOOPLA-master/Data/time step/Misc
 
