@@ -69,4 +69,4 @@ You need a **DATA_FOR_CSGD_timestep.Rdata** file in the **RAW_DATA/time step** f
 
 ## Contact
 Please, feel free to contact me if you find any bugs or have any questions. :smiley:
-:e-mail:: emixi-sthefany.valdez-medina.1@ulaval.ca 
+    :e-mail:: emixi-sthefany.valdez-medina.1@ulaval.ca 
