@@ -35,7 +35,7 @@ The following gives a brief description of the individual files:
 3. **CSGD.r**
 4. **CreateSchaakeRanks.r**
 
-### :large_blue_circle: without using [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) data
+### :red_circle: without using [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) data
  
 #### Preliminary steps 
 You need a **DATA_FOR_CSGD_timestep.Rdata** file in the **RAW_DATA/time step** folder with the following variables:
