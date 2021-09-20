@@ -1,7 +1,7 @@
 # CSGD :umbrella: :earth_americas: :computer:
 This repository contains files to post-process precipitation ensemble forecasts using the [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) method. The scripts are designed to be used in conjunction with [HOOPLA](https://github.com/AntoineThiboult/HOOPLA).
 
-The [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) post-processor is based on a complex heteroscedastic, nonlinearregression model conceived to address the peculiarities of precipitation (e.g., its intermittent and highly skewed nature andits typically large forecast errors). This method yields full predictive probability distributions for precipitation accumulations based on ensemble model output statistics (EMOS) and censored, shifted gamma distributions. 
+The [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) post-processor is based on a complex heteroscedastic, nonlinear regression model conceived to address the peculiarities of precipitation (e.g., its intermittent and highly skewed nature and its typically large forecast errors). This method yields full predictive probability distributions for precipitation accumulations based on ensemble model output statistics (EMOS) and censored, shifted gamma distributions. 
 
 [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) is an automatic software that allows to carry out model calibration and obtain hydrological simulations and forecasts at different time steps.
 
@@ -10,12 +10,12 @@ The following gives a brief description of the individual files:
 * **FormatData.r**: This code prepares the observations and precipitation forecasts in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) format to work directly on the CSGD functions. It reads the Matlab variables in **Hydromet_obs** & **Ens_met_fcst** folders. 
 * **AuxiliaryFunctions.r**: A collection of small functions (calculating ensemble statistics, data selection, etc.) used by the other R-scripts
 * **CSGD.r**: This code is a simplified variant of the method proposed by Scheuerer and Hamill [2015b](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml): Censored, Shifted Gamma Distributions (CSGD).  
-* **CreateSchaakeRanks.r**: This code selects historical trajectories by the method proposed by Scheuerer et al. [2017](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2016WR020133) and determine the rank order: Min. Divergence Schaake Shuffle (MDSS).
+* **CreateSchaakeRanks.r**: This code selects historical trajectories by the method proposed by Scheuerer et al. [2017](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/2016WR020133) and determines the rank order: Min. Divergence Schaake Shuffle (MDSS).
 
 
 ## How does it work? :memo:
 
-### Preliminar steps
+### Preliminary steps
 
 1. Copy and paste the **Hydromet_obs** & **Ens_met_fcst** folders from [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) into the **RAW_DATA/time step** folder (time step could be 3h or 24h). Folders path in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA):
 
