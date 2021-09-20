@@ -15,7 +15,7 @@ The following gives a brief description of the individual files:
 
 ## How does it work? :memo:
 
-### When using [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) data
+### :large_blue_circle: When using [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) data
 
 #### Preliminary steps 
 1. Copy and paste the **Hydromet_obs** & **Ens_met_fcst** folders from [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) into the **RAW_DATA/time step** folder (time step could be 3h or 24h). Folders path in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA):
@@ -35,7 +35,7 @@ The following gives a brief description of the individual files:
 3. **CSGD.r**
 4. **CreateSchaakeRanks.r**
 
-### without using [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) data
+### :large_blue_circle: without using [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) data
  
 #### Preliminary steps 
 You need a **DATA_FOR_CSGD_timestep.Rdata** file in the **RAW_DATA/time step** folder with the following variables:
