@@ -1,5 +1,5 @@
 # CSGD :umbrella: :earth_americas: :computer:
-This repository contains files to post-process precipitation ensemble forecasts using the [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) method. The scripts are designed to be compatible with [HOOPLA](https://github.com/AntoineThiboult/HOOPLA). That is, [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) outputs can be used as input variables in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) hydrological models.
+This repository contains files to post-process precipitation ensemble forecasts using the [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) method. The scripts are designed to be compatible with [HOOPLA](https://github.com/AntoineThiboult/HOOPLA). That is, [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) outputs can be used as input variables of the [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) hydrological models.
 
 The [CSGD](https://journals.ametsoc.org/view/journals/mwre/143/11/mwr-d-15-0061.1.xml) post-processor is based on a complex heteroscedastic, nonlinear regression model conceived to address the peculiarities of precipitation (e.g., its intermittent and highly skewed nature and its typically large forecast errors). This method yields full predictive probability distributions for precipitation accumulations based on ensemble model output statistics (EMOS) and censored, shifted gamma distributions. 
 
@@ -20,10 +20,8 @@ The following gives a brief description of the individual files:
 #### Preliminary steps 
 1. Copy and paste the **Hydromet_obs** & **Ens_met_fcst** folders from [HOOPLA](https://github.com/AntoineThiboult/HOOPLA) into the **RAW_DATA/time step** folder (time step could be 3h or 24h). Folders path in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA):
 
-    >  **Observations:** HOOPLA-master/Data/time step/Hydromet_obs
-    
-    >  **Forecasts:** HOOPLA-master/Data/time step/Ens_met_fcst 
-       
+    >  **Hydromet_obs & Ens_met_fcst:** HOOPLA-master/Data/time step/
+           
 2. Copy and paste the **catchment_names.mat** file into the **RAW_DATA/time step** folder. File path in [HOOPLA](https://github.com/AntoineThiboult/HOOPLA):
 
     > **Catchments names:** HOOPLA-master/Data/time step/Misc
